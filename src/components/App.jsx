@@ -1,3 +1,4 @@
+import './index.css';
 import user from '../json/user.json';
 import { Profile } from './profile/profile';
 import data from '../json/data.json';

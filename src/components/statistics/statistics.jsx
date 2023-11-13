@@ -1,16 +1,11 @@
 import css from './statistics.module.css';
 import propTypes from 'prop-types';
-
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
+import { getRandomHexColor } from './utils/randomHexColor';
 
 export const Statistics = ({ title, stats }) => {
   return (
     <section className={css.statistics}>
-      <h2 className={css.title}>{title}</h2>
+      {title !== undefined && <h2 className={css.title}>{title}</h2>}
       <ul className={css.statsList}>
         {stats.map(stat => (
           <li
@@ -29,5 +24,11 @@ export const Statistics = ({ title, stats }) => {
 
 Statistics.propTypes = {
   title: propTypes.string.isRequired,
-  stats: propTypes.array.isRequired,
+  stats: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.string.isRequired,
+      label: propTypes.string.isRequired,
+      percentage: propTypes.number.isRequired,
+    })
+  ),
 };
